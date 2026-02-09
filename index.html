@@ -6,11 +6,11 @@
     <title>Be My Valentine?</title>
     <style>
         body { text-align: center; font-family: 'Arial', sans-serif; background-color: #ffebee; display: flex; flex-direction: column; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
-        h1 { color: #d32f2f; font-size: 2.5rem; padding: 0 20px; }
-        .buttons { margin-top: 50px; position: relative; height: 100px; }
-        button { font-size: 1.5rem; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; margin: 10px; }
-        #yesBtn { background-color: #ff4081; color: white; }
-        #noBtn { background-color: #757575; color: white; position: absolute; left: 50%; margin-left: 20px; }
+        h1 { color: #d32f2f; font-size: 2.2rem; padding: 0 20px; }
+        .buttons { margin-top: 50px; position: relative; height: 150px; width: 100%; }
+        button { font-size: 1.5rem; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; transition: 0.2s; position: absolute; }
+        #yesBtn { background-color: #ff4081; color: white; left: 50%; transform: translateX(-110%); top: 0; }
+        #noBtn { background-color: #757575; color: white; left: 50%; transform: translateX(10%); top: 0; }
         #success { display: none; }
         img { width: 250px; max-width: 80%; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     </style>
@@ -22,23 +22,30 @@
         <h1>Will you be my Valentine? 💖</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="showSuccess()">Yes</button>
-            <button id="noBtn" onmouseover="moveButton()">No</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
         </div>
     </div>
 
     <div id="success">
-        <img src="https://i.postimg.cc/xjg1twKh/IMG-5149.jpg" alt="Success Image">
-        <h1>Yes!! 誕生日もおめでとう！🎂💖</h1>
-        <p>最高の1年にしようね！🥰</p>
+        <img src="https://i.postimg.cc/dVn0SzPJ/IMG-0453.jpg alt="Success Image">
+        <h1>Yes!! And Happy Birthday to u🎂💖</h1>
+        </pI>I saw this on TikTok and wanted to make one for you!Can’t wait for our Vancouver trip together!</p>
     </div>
 
     <script>
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            // 画面の端に行き過ぎないように調整
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 40) + 20;
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 40) + 20;
+            
+            // アニメーションを解除して一瞬で移動
+            btn.style.transition = 'none';
             btn.style.left = `${x}px`;
             btn.style.top = `${y}px`;
+            // 真ん中に固定する設定（transform）を解除
+            btn.style.transform = 'none';
+            btn.style.margin = '0';
         }
         function showSuccess() {
             document.getElementById('question').style.display = 'none';
