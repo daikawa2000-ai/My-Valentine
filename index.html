@@ -7,12 +7,14 @@
     <style>
         body { text-align: center; font-family: 'Arial', sans-serif; background-color: #ffebee; display: flex; flex-direction: column; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
         h1 { color: #d32f2f; font-size: 2.2rem; padding: 0 20px; }
-        .buttons { margin-top: 50px; position: relative; height: 150px; width: 100%; }
+        .buttons { margin-top: 50px; position: relative; height: 100px; width: 100%; }
         button { font-size: 1.5rem; padding: 15px 30px; border: none; border-radius: 50px; cursor: pointer; transition: 0.2s; position: absolute; }
-        #yesBtn { background-color: #ff4081; color: white; left: 50%; transform: translateX(-110%); top: 0; }
-        #noBtn { background-color: #757575; color: white; left: 50%; transform: translateX(10%); top: 0; }
-        #success { display: none; }
+        #yesBtn { background-color: #ff4081; color: white; left: 50%; transform: translateX(-110%); }
+        /* Noボタンの初期位置をしっかり固定 */
+        #noBtn { background-color: #757575; color: white; left: 50%; transform: translateX(10%); }
+        #success { display: none; padding: 20px; }
         img { width: 250px; max-width: 80%; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .msg { font-size: 1.1rem; color: #555; line-height: 1.6; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -27,26 +29,34 @@
     </div>
 
     <div id="success">
-        <img src="https://i.postimg.cc/dVn0SzPJ/IMG-0453.jpg alt="Success Image">
+        <img src="https://i.postimg.cc/dVn0SzPJ/IMG-0453.jpg" alt="Success Image">
         <h1>Yes!! And Happy Birthday to u🎂💖</h1>
-        </pI>I saw this on TikTok and wanted to make one for you!Can’t wait for our Vancouver trip together!</p>
+        <div class="msg">
+            I saw this on TikTok and wanted to make one for you!<br>
+            Can’t wait for our Vancouver trip together! 🇨🇦🥰
+        </div>
     </div>
 
     <script>
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            // 画面の端に行き過ぎないように調整
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 40) + 20;
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 40) + 20;
             
-            // アニメーションを解除して一瞬で移動
-            btn.style.transition = 'none';
-            btn.style.left = `${x}px`;
-            btn.style.top = `${y}px`;
-            // 真ん中に固定する設定（transform）を解除
-            btn.style.transform = 'none';
+            // 画面のサイズを取得
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // ボタンが画面から飛び出さないように計算（余白50px）
+            const newX = Math.random() * (windowWidth - btn.offsetWidth - 100) + 50;
+            const newY = Math.random() * (windowHeight - btn.offsetHeight - 100) + 50;
+            
+            // 移動させるための設定
+            btn.style.position = 'fixed'; // 位置を完全に自由に
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+            btn.style.transform = 'none'; // 真ん中寄せ設定を解除
             btn.style.margin = '0';
         }
+
         function showSuccess() {
             document.getElementById('question').style.display = 'none';
             document.getElementById('success').style.display = 'block';
